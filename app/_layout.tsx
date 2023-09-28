@@ -1,15 +1,24 @@
 import { View, Text } from 'react-native'
-import React from 'react'
-import Header from '../components/layouts/Header'
+import React, { useEffect, useState } from 'react'
+import LoadingPage from '../components/ui/LoadingPage'
+import { Slot, Stack } from 'expo-router'
+import { logged } from '../repositories/authApi'
 
 const _layout = () => {
-  return (
-    <View>
-      <Header />
-      
-      <Text>_layout</Text>
-    </View>
-  )
+  const [loading, setLoading] = useState(false)
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await logged()
+  //     setLoading(false)
+  //   }
+
+  //   fetchData()
+  // }, [])
+
+  return <>
+    { loading ? <LoadingPage/> : <Stack screenOptions={{headerShown: false}} /> }
+  </>
 }
 
 export default _layout
