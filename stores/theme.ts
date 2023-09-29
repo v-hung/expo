@@ -2,15 +2,18 @@ import { create } from "zustand"
 import tw from "../lib/tailwind"
 
 const LIGHT: State = {
-  primary: tw.color('text-blue-500')
+  primary: tw.color('text-green-600'),
+  primary2: tw.color('text-green-400')
 }
 
 const DARK: State = {
-  primary: tw.color('text-blue-600')
+  primary: tw.color('text-green-600'),
+  primary2: tw.color('text-green-400')
 }
 
 type State = {
-  primary: string
+  primary: string,
+  primary2: string
 }
 
 type Actions = {

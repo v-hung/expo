@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Animated, ViewStyle, TextStyle } from 'react-native'
 import tw from '../../lib/tailwind';
 import { ReactNode } from 'react';
 import Container from './Container';
@@ -6,23 +6,26 @@ import Constants from 'expo-constants';
 const statusBarHeight = Constants.statusBarHeight;
 
 const AppBar = ({
-  title, leading, actions, style, textStyle, containerStyle
+  title, leading, actions, style, titleStyle, containerStyle
 }: {
-  title: string,
+  title: string | ReactNode,
   leading?: ReactNode,
   actions?: ReactNode,
-  style?: any, textStyle?: any,
-  containerStyle?: any
+  style?: ViewStyle, titleStyle?: TextStyle,
+  containerStyle?: ViewStyle
 }) => {
 
   return (
-    <View style={{...tw`shadow bg-white`, ...{paddingTop: statusBarHeight}, ...style}}>
-      <Container style={{...tw`h-14 flex-row space-x-4 items-center`, ...containerStyle}}>
+    <Animated.View style={{...tw`shadow bg-white`, ...{paddingTop: statusBarHeight}, ...style}}>
+      <Container style={{...tw`h-14 flex-row items-center`, ...containerStyle}}>
         { leading ? leading : null }
-        <Text style={{...tw`flex-1 text-lg text-center`, ...textStyle}}>{title}</Text>
+        { typeof title == "string"
+          ? <Text style={{...tw`flex-1 text-lg text-center`, ...titleStyle}}>{title}</Text>
+          : <View style={tw`flex-1`}>{title}</View>
+        }
         { actions ? actions : null }
       </Container>
-    </View>
+    </Animated.View>
   )
 }
 
